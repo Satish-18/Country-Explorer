@@ -1,0 +1,136 @@
+{% extends "base.html" %} {% block title %}{% endblock %} {% block content %}
+<div class="card text-center">
+  <div class="card-body bg-secondary">
+    <h1>
+      Country Explorer App
+      <span class="badge bg-secondary-emphasis mt-5"></span>
+    </h1>
+    <h5 class="mt-2">Using Python Framework and Django Framework</h5>
+    <h5 class="">With API from restcountries</h5>
+  </div>
+</div>
+<nav class="navbar container justify-content-center mt-5">
+  <form class="d-flex" role="search" method="post">
+    {% csrf_token %}
+    <input
+      class="form-control"
+      type="search"
+      placeholder="Search Your Country"
+      aria-label="Search"
+      name="country"
+      id="country"
+    />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+</nav>
+
+{%for item in data%}
+<div
+  class="container justify-content-center mt-3 mx-5"
+  style="max-width: 400px; display: inline-block"
+>
+  <div class="col">
+    <div class="card">
+      <img
+        src="{{item.flags.svg}}"
+        alt="..."
+        style="max-height: auto; max-width: auto"
+      />
+      <div class="card-body">
+        <h3 class="card-title">{{item.name.common}}</h3>
+        <h5 class="card-text fw-bold" style="font-size: 15px">
+          <span class="badge text-bg-info"></span>
+          {{item.name.official}}
+        </h5>
+
+        <p class="card-title fw-bold">
+          <span class="badge text-bg-info"> Capital:</span>
+          {%for capitals in item.capital%} {{capitals}} {%endfor%}
+        </p>
+
+        <p class="card-title fw-bold">
+          <span class="badge text-bg-info"> Area:</span>{{item.area}}
+        </p>
+        <p class="card-title fw-bold">
+          <span class="badge text-bg-info"> Population:</span
+          >{{item.population}}
+        </p>
+        <p class="card-title fw-bold">
+          <span class="badge text-bg-info"> Region:</span>{{item.region}}
+        </p>
+        <p class="card-title fw-bold">
+          <span class="badge text-bg-info"> Sub-region:</span>{{item.subregion}}
+        </p>
+        <p class="card-title fw-bold">
+          <span class="badge text-bg-info"> Borders:</span>
+          {%for border in item.borders%} {{border}}, {%endfor%}
+        </p>
+      </div>
+      <button type="button" class="btn btn-outline-info">
+        <a
+          href="{{item.maps.openStreetMaps}}"
+          style="text-decoration: none; color: #34d8eb"
+          target="_blank"
+          >Country Map
+        </a>
+      </button>
+    </div>
+  </div>
+</div>
+
+{% comment %}
+<div
+  class="container justify-content center mt-4"
+  style="max-width: 100px; background-color: #d6d4ce; display: inline-block"
+>
+  <img src="{{item.flags.svg}}" class="" alt="{{item.flags.alt}}" />
+  <div class="card-body">
+    <h3 class="card-title">{{item.name.common}}</h3>
+
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Official Name:</span
+      >{{item.name.official}}
+    </p>
+
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Capital:</span>
+      {%for capitals in item.capital%} {{capitals}} {%endfor%}
+    </p>
+
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Area:</span>{{item.area}}
+    </p>
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Population:</span>{{item.population}}
+    </p>
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Region:</span>{{item.region}}
+    </p>
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Sub-region:</span>{{item.subregion}}
+    </p>
+    <p class="card-title fw-bold">
+      <span class="badge text-bg-info"> Borders:</span>
+      {%for border in item.borders%} {{border}}, {%endfor%}
+    </p>
+
+    <p class="card-text"></p>
+    <button type="button" class="btn btn-outline-info">
+      <a
+        href="{{item.maps.openStreetMaps}}"
+        style="text-decoration: none; color: #34d8eb"
+        target="_blank"
+        >Country Map
+      </a>
+    </button>
+  </div>
+</div>
+{% endcomment %} {%endfor%}
+
+<div class="card text-center mt-4">
+  <div class="card-body">
+    <h5 class="card-title">Country Explorer</h5>
+    <p class="card-text">All Right reserved .</p>
+  </div>
+</div>
+{% endblock %}
